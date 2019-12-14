@@ -16,20 +16,28 @@ namespace webapi.Services
 
         public PhpChallengeService()
         {
-            _inputWordsAndLengths = new Dictionary<string, int>();
         }
 
         public int Sanaruudukko(string rowsWithPipes, string wordsWithPipes)
         {
+            _inputWordsAndLengths = new Dictionary<string, int>();
             _foundWords = new HashSet<string>();
             _inputWordsTrie = new HashSet<string>();
 
             // max words 20, mag width and height 10, word max length 10.
             //const int maxWords = 20;
-            var rows = rowsWithPipes.Split("|");
-            var words = wordsWithPipes.Split("|");
+            if (rowsWithPipes == null)
+            {
+                throw new Exception("rowsWithPipes == null");
+            }
 
-            foreach (var word in words)
+            if (wordsWithPipes == null)
+            {
+                throw new Exception("wordsWithPipes == null");
+            }
+
+            var rows = rowsWithPipes.Split("|");
+            foreach (var word in wordsWithPipes.Split("|"))
             {
                 _inputWordsAndLengths[word] = word.Length;
                 for (int i = 1; i <= word.Length; i++)
@@ -69,9 +77,9 @@ namespace webapi.Services
                 for (int x = 0; x < columnCount; x++)
                 {
                     grid[x, y] = rows[y][x];
-                    Debug.Write(grid[x, y]);
+                    //Debug.Write(grid[x, y]);
                 }
-                Debug.WriteLine("");
+                //Debug.WriteLine("");
             }
 
             return grid;
