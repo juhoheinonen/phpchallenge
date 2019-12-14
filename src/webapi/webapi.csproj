@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="PhpChallengeTests\**" />
+    <Content Remove="PhpChallengeTests\**" />
+    <EmbeddedResource Remove="PhpChallengeTests\**" />
+    <None Remove="PhpChallengeTests\**" />
+  </ItemGroup>
+
+</Project>
