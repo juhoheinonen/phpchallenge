@@ -45,7 +45,7 @@ namespace webapi.Controllers
         }
 
         [HttpPost("sanaruudukko")]
-        public string Sanaruudukko([FromQuery] string rivit, [FromQuery] string sanat)
+        public string Sanaruudukko(string rivit, string sanat)
         {
             int result = PhpChallengeService.Sanaruudukko(rivit, sanat);
 
