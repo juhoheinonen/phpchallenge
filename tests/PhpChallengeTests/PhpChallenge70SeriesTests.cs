@@ -7,6 +7,7 @@ namespace PhpChallengeTests
     public class PhpChallenge70SeriesTests
     {
         [DataRow("AINAK|SLMAN|MUTLI|HTPVS", "ILMA|MAA|TULI|VESI", 3)]
+        [DataRow("AA|AA", "A|AA|AAA|AAAA|AAAAA", 4)]
         [DataTestMethod]
         public void Problem73(string rows, string words, int expected)
         {

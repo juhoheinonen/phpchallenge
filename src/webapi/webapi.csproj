@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/25f9d19c-9169-486a-b887-53a42ed339db/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/webapi</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/25f9d19c-9169-486a-b887-53a42ed339db/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/webapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +11,14 @@
     <Content Remove="PhpChallengeTests\**" />
     <EmbeddedResource Remove="PhpChallengeTests\**" />
     <None Remove="PhpChallengeTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
