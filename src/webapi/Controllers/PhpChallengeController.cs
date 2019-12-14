@@ -44,9 +44,28 @@ namespace webapi.Controllers
             return "test";
         }
 
-        [HttpPost("sanaruudukko")]
-        public string Sanaruudukko(string rivit, string sanat)
+        [HttpPost("sanaruudukko.php")]
+        public string Sanaruudukko([FromQuery]string rivit, [FromQuery]string sanat)
         {
+            if (rivit == null || sanat == null)
+            {
+                if (Request.Form["rivit"].Count > 0)
+                {
+                    rivit = Request.Form["rivit"];
+                }
+
+                if (Request.Form["sanat"].Count > 0)
+                {
+                    sanat = Request.Form["sanat"];
+                }
+
+                //_logger.LogError("nulleja. " + Request.QueryString.HasValue);
+
+                //throw new InvalidOperationException(Request.QueryString.HasValue ? Request.QueryString.Value : "null query");
+
+                ////throw new Exception(Request.Query["rivit"] + "." + Request.Query["sanat"]);
+            }
+
             int result = PhpChallengeService.Sanaruudukko(rivit, sanat);
 
             return result.ToString();
