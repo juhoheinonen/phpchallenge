@@ -13,6 +13,7 @@ namespace webapi.Services
         HashSet<string> _foundWords;
         const int maxWordLength = 10;
         HashSet<string> _inputWordsTrie;
+        int longestWordLength;
 
         public PhpChallengeService()
         {
@@ -43,6 +44,10 @@ namespace webapi.Services
                 for (int i = 1; i <= word.Length; i++)
                 {
                     _inputWordsTrie.Add(word.Substring(0, i));
+                    if (word.Length > longestWordLength)
+                    {
+                        longestWordLength = word.Length;
+                    }
                 }
             }
 
@@ -59,7 +64,8 @@ namespace webapi.Services
 
                     if (_inputWordsTrie.Contains(current))
                     {
-                        var alreadyTakenCoordinates = new HashSet<Point>() { new Point(x, y) };
+                        var alreadyTakenCoordinates = new HashSet<Point>();
+                        //var alreadyTakenCoordinates = new HashSet<Point>() { new Point(x, y) };
                         FindWords(new Point(x, y), grid, current, alreadyTakenCoordinates);
                     }
                 }
@@ -87,7 +93,7 @@ namespace webapi.Services
 
         private void FindWords(Point inputCoordinate, char[,] grid, string thisFar, HashSet<Point> alreadyTakenCoordinates)
         {
-            if (thisFar.Length > maxWordLength)
+            if (thisFar.Length > longestWordLength)
             {
                 return;
             }
@@ -107,7 +113,7 @@ namespace webapi.Services
             {
                 var left = grid[coordinate.X, coordinate.Y];
                 var newAlreadyTaken = new HashSet<Point>(alreadyTakenCoordinates);
-                newAlreadyTaken.Add(coordinate);
+                //newAlreadyTaken.Add(coordinate);
                 FindWords(coordinate, grid, thisFar + left, newAlreadyTaken);
             }
 
@@ -117,7 +123,7 @@ namespace webapi.Services
             {
                 var up = grid[coordinate.X, coordinate.Y];
                 var newAlreadyTaken = new HashSet<Point>(alreadyTakenCoordinates);
-                newAlreadyTaken.Add(coordinate);
+                //newAlreadyTaken.Add(coordinate);
                 FindWords(coordinate, grid, thisFar + up, newAlreadyTaken);
             }
 
@@ -127,7 +133,7 @@ namespace webapi.Services
             {
                 var right = grid[coordinate.X, coordinate.Y];
                 var newAlreadyTaken = new HashSet<Point>(alreadyTakenCoordinates);
-                newAlreadyTaken.Add(coordinate);
+                //newAlreadyTaken.Add(coordinate);
                 FindWords(coordinate, grid, thisFar + right, newAlreadyTaken);
             }
 
@@ -137,7 +143,7 @@ namespace webapi.Services
             {
                 var down = grid[coordinate.X, coordinate.Y];
                 var newAlreadyTaken = new HashSet<Point>(alreadyTakenCoordinates);
-                newAlreadyTaken.Add(coordinate);
+                //newAlreadyTaken.Add(coordinate);
                 FindWords(coordinate, grid, thisFar + down, newAlreadyTaken);
             }
         }
