@@ -85,6 +85,7 @@ namespace webapi.Services
                     grid[x, y] = rows[y][x];
                     //Debug.Write(grid[x, y]);
                 }
+
                 //Debug.WriteLine("");
             }
 
@@ -146,6 +147,38 @@ namespace webapi.Services
                 //newAlreadyTaken.Add(coordinate);
                 FindWords(coordinate, grid, thisFar + down, newAlreadyTaken);
             }
+        }
+
+        public int IsRepeatingFraction(int numerator, int denominator)
+        {
+            // straight from https://stackoverflow.com/questions/1315595/algorithm-for-detecting-repeating-decimals
+            int digit = -1;
+            while (numerator >= denominator) {
+                denominator <<= 1;
+                digit++;
+            }
+            Dictionary<int, int> states = new Dictionary<int, int>();
+            bool found = false;
+            while (numerator > 0 || digit >= 0) {
+                if (digit == -1) Console.Write('.');
+                numerator <<= 1;
+                if (states.ContainsKey(numerator)) {
+                    // Console.WriteLine(digit >= 0 ? new String('0', digit + 1) : String.Empty);
+                    // Console.WriteLine("Repeat from digit {0} length {1}.", states[numerator], states[numerator] - digit);
+                    found = true;
+                    break;
+                }
+                states.Add(numerator, digit);
+                if (numerator < denominator) {
+                    Console.Write('0');
+                } else {
+                    Console.Write('1');
+                    numerator -= denominator;
+                }
+                digit--;
+            }
+            
+            return found ? 1 : 0;
         }
     }
 }

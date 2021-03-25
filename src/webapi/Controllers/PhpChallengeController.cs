@@ -24,14 +24,10 @@ namespace webapi.Controllers
                 {
                     _phpChallengeService = new PhpChallengeService();
                 }
+
                 return _phpChallengeService;
             }
         }
-
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         public PhpChallengeController(ILogger<PhpChallengeController> logger)
         {
@@ -44,31 +40,19 @@ namespace webapi.Controllers
             return "test";
         }
 
-        [HttpPost("sanaruudukko.php")]
-        public string Sanaruudukko([FromQuery]string rivit, [FromQuery]string sanat)
+        [HttpGet("73.php")]
+        public string IsInfinite(IntInput input)
         {
-            if (rivit == null || sanat == null)
-            {
-                if (Request.Form["rivit"].Count > 0)
-                {
-                    rivit = Request.Form["rivit"];
-                }
-
-                if (Request.Form["sanat"].Count > 0)
-                {
-                    sanat = Request.Form["sanat"];
-                }
-
-                //_logger.LogError("nulleja. " + Request.QueryString.HasValue);
-
-                //throw new InvalidOperationException(Request.QueryString.HasValue ? Request.QueryString.Value : "null query");
-
-                ////throw new Exception(Request.Query["rivit"] + "." + Request.Query["sanat"]);
-            }
-
-            int result = PhpChallengeService.Sanaruudukko(rivit, sanat);
+            int result = PhpChallengeService.IsRepeatingFraction(input.a, input.b);
 
             return result.ToString();
+        }
+
+        public class IntInput
+        {
+            public int a { get; set; }
+
+            public int b { get; set; }
         }
     }
 }

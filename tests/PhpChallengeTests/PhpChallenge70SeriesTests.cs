@@ -19,5 +19,15 @@ namespace PhpChallengeTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void RealProblem73()
+        {
+            var sut = new PhpChallengeService();
+            Assert.AreEqual(1, sut.IsRepeatingFraction(8, 3));
+            Assert.AreEqual(1, sut.IsRepeatingFraction(1, 6));
+            Assert.AreEqual(0, sut.IsRepeatingFraction(3, 8));
+            Assert.AreEqual(1, sut.IsRepeatingFraction(4, 7));
+        }
     }
 }
