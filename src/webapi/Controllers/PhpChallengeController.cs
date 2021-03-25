@@ -40,10 +40,10 @@ namespace webapi.Controllers
             return "test";
         }
 
-        [HttpGet("73.php")]
-        public string IsInfinite(IntInput input)
+        [HttpPost("73.php")]
+        public string IsInfinite([FromQuery]int a, [FromQuery]int b)
         {
-            int result = PhpChallengeService.IsRepeatingFraction(input.a, input.b);
+            int result = PhpChallengeService.IsRepeatingFraction(a, b);
 
             return result.ToString();
         }
